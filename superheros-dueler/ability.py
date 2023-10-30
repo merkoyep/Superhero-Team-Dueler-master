@@ -17,7 +17,3 @@ class Ability:
     attack_value = random.randint(0, self.max_damage)
     return attack_value
   
-
-if __name__ == "__main__":
-  # If you run this file from the terminal
-  # this block is executed.

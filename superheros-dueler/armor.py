@@ -12,6 +12,3 @@ class Armor:
         block_level = random.randint(0, self.max_block)
         return block_level
     
-if __name__ == "__main__":
-  # If you run this file from the terminal
-  # this block is executed.

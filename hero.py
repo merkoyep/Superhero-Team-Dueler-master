@@ -11,7 +11,8 @@ class Hero:
         name: String
         starting_health: Integer
         current_health: Integer'''
-
+        self.deaths = 0
+        self.kills = 0
         self.abilities = []
         self.armors = []
         self.name = name
@@ -20,21 +21,28 @@ class Hero:
 
     def fight(self, opponent):
        if not self.abilities and not opponent.abilities:
-          print('Draw')
+          return 'Draw'
        else:
           game_status = True
           while game_status:
              opponent.take_damage(self.attack())
              self.take_damage(opponent.attack())
              if not self.is_alive() and not opponent.is_alive():
+                game_status = False
                 print(f'Everyone died! It\'s a draw!')
-                game_status = False
+                return 'Tie'
              elif not self.is_alive():
+                opponent.add_kill(1)
+                self.add_death(1)
+                game_status = False
                 print(f'{opponent.name} won!')
-                game_status = False
+                return 'Lose'
              elif not opponent.is_alive():
-                print(f'{self.name} won!')
+                self.add_kill(1)
+                opponent.add_death(1)
                 game_status = False
+                print(f'{self.name} won!')
+                return 'Win'
       #  weight_denominator = self.current_health + opponent.current_health
       #  self_ratio = self.current_health / weight_denominator * 100
       #  opponent_ratio = opponent.current_health / weight_denominator * 100
@@ -84,3 +92,11 @@ class Hero:
     def add_weapon(self, weapon):
        self.abilities.append(weapon)
 
+    def add_kill(self, num_kills):
+       '''Update self.kills by num_kills amount'''
+       self.kills += num_kills
+    def add_death(self, num_deaths):
+       '''update deaths with num_deaths'''
+       self.deaths += num_deaths
+
+    

@@ -30,6 +30,8 @@ class Team:
     self.heroes.append(hero)
   def stats(self):
      for hero in self.heroes:
+        if hero.deaths == 0:
+           hero.deaths = 1
         kd = hero.kills / hero.deaths
         print(f"{hero.name} Kill/Deaths:{kd}")
 
